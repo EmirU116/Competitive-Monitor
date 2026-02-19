@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Competitor {
+  id        String     @id @default(cuid())
+  name      String
+  url       String
+  pages     String     // JSON array of page URLs to monitor
+  createdAt DateTime   @default(now())
+  snapshots Snapshot[]
+}
+
+model Snapshot {
+  id           String     @id @default(cuid())
+  competitorId String
+  pageUrl      String
+  content      String     // scraped text content
+  createdAt    DateTime   @default(now())
+  competitor   Competitor @relation(fields: [competitorId], references: [id])
+  changes      Change[]
+}
+
+model Change {
+  id         String   @id @default(cuid())
+  snapshotId String
+  pageUrl    String
+  diff       String   // raw text diff
+  summary    String   // Claude AI summary
+  severity   String   // "low" | "medium" | "high"
+  detectedAt DateTime @default(now())
+  snapshot   Snapshot @relation(fields: [snapshotId], references: [id])
+}
