@@ -32,6 +32,7 @@ export default function DashboardPage() {
   const [competitors, setCompetitors] = useState<Competitor[]>([])
   const [changes, setChanges] = useState<Change[]>([])
   const [scanningId, setScanningId] = useState<string | null>(null)
+  const [scanningAll, setScanningAll] = useState(false)
   const [loading, setLoading] = useState(true)
 
   async function fetchData() {
@@ -47,6 +48,16 @@ export default function DashboardPage() {
   useEffect(() => {
     fetchData()
   }, [])
+
+  async function handleScanAll() {
+    setScanningAll(true)
+    try {
+      await fetch('/api/scan/all', { method: 'POST' })
+      await fetchData()
+    } finally {
+      setScanningAll(false)
+    }
+  }
 
   async function handleScan(id: string) {
     setScanningId(id)
@@ -80,12 +91,23 @@ export default function DashboardPage() {
             {competitors.length} competitor{competitors.length !== 1 ? 's' : ''} tracked
           </p>
         </div>
-        <Link
-          href="/competitors/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-        >
-          + Add Competitor
-        </Link>
+        <div className="flex items-center gap-2">
+          {competitors.length > 0 && (
+            <button
+              onClick={handleScanAll}
+              disabled={scanningAll || scanningId !== null}
+              className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {scanningAll ? 'Scanning all…' : 'Scan All'}
+            </button>
+          )}
+          <Link
+            href="/competitors/new"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+          >
+            + Add Competitor
+          </Link>
+        </div>
       </div>
 
       {/* Competitors Grid */}
@@ -106,7 +128,7 @@ export default function DashboardPage() {
               key={c.id}
               {...c}
               onScan={handleScan}
-              scanning={scanningId === c.id}
+              scanning={scanningId === c.id || scanningAll}
             />
           ))}
         </div>
