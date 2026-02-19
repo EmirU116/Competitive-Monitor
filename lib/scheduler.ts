@@ -3,6 +3,7 @@ import { prisma } from './db'
 import { scrapePage } from './scraper'
 import { computeDiff } from './diff'
 import { generateChangeSummary } from './ai'
+import { sendNotification } from './notifications'
 
 let started = false
 
@@ -49,7 +50,7 @@ export function startScheduler() {
             diff
           )
 
-          await prisma.change.create({
+          const change = await prisma.change.create({
             data: {
               snapshotId: newSnapshot.id,
               pageUrl,
@@ -58,6 +59,11 @@ export function startScheduler() {
               severity: aiSummary.severity,
             },
           })
+
+          await sendNotification(
+            { id: change.id, pageUrl: change.pageUrl, summary: change.summary, severity: change.severity },
+            { id: competitor.id, name: competitor.name, url: competitor.url }
+          )
 
           console.log(
             `[scheduler] Change detected for ${competitor.name} — ${pageUrl}`

@@ -36,3 +36,8 @@ model Change {
   detectedAt DateTime @default(now())
   snapshot   Snapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
 }
+
+model Setting {
+  key   String @id
+  value String
+}

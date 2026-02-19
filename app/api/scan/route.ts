@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db'
 import { scrapePage } from '@/lib/scraper'
 import { computeDiff } from '@/lib/diff'
 import { generateChangeSummary } from '@/lib/ai'
+import { sendNotification } from '@/lib/notifications'
 
 export const maxDuration = 300
 
@@ -64,7 +65,7 @@ export async function POST(req: NextRequest) {
       const aiSummary = await generateChangeSummary(competitor.name, pageUrl, diff)
 
       // Save change
-      await prisma.change.create({
+      const change = await prisma.change.create({
         data: {
           snapshotId: newSnapshot.id,
           pageUrl,
@@ -73,6 +74,11 @@ export async function POST(req: NextRequest) {
           severity: aiSummary.severity,
         },
       })
+
+      await sendNotification(
+        { id: change.id, pageUrl: change.pageUrl, summary: change.summary, severity: change.severity },
+        { id: competitor.id, name: competitor.name, url: competitor.url }
+      )
 
       results.push({ pageUrl, status: 'change_detected', changeDetected: true })
     } catch (err) {

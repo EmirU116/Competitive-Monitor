@@ -32,8 +32,31 @@ This is a **Next.js App Router** application that monitors competitor websites f
 3. New snapshots are diffed against the previous snapshot using the **diff** library
 4. Meaningful diffs are sent to **Claude** (`@anthropic-ai/sdk`) to produce a human-readable summary with a severity rating
 5. Results are stored as `Change` records linked to the snapshot
+6. `lib/notifications.ts` fires webhook and/or email alerts based on severity threshold stored in `Setting`
 
-**Database:** SQLite via Prisma. Schema is in `prisma/schema.prisma`. The three models are `Competitor → Snapshot → Change`.
+**Database:** SQLite via Prisma. Schema is in `prisma/schema.prisma`. Models: `Competitor → Snapshot → Change`, plus `Setting` (key-value store for notification config).
+
+**Notification system** (`lib/notifications.ts`):
+- Called immediately after every `prisma.change.create` in all three scan entry points
+- Reads config from the `Setting` table at call time (no server restart needed)
+- Webhook: POSTs Slack-attachment-format JSON — compatible with Slack, Discord, Teams, and generic receivers
+- Email: sends HTML via `nodemailer` SMTP (port 465 → TLS, others → STARTTLS)
+- Both channels are independently `try/catch`-isolated — never throws
+
+**Setting keys** (managed via `/settings` UI or direct DB edits):
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `notify_min_severity` | `"high"` | `"low"` \| `"medium"` \| `"high"` |
+| `webhook_enabled` | `"false"` | `"true"` \| `"false"` |
+| `webhook_url` | `""` | Webhook endpoint URL |
+| `email_enabled` | `"false"` | `"true"` \| `"false"` |
+| `email_smtp_host` | `""` | SMTP hostname |
+| `email_smtp_port` | `"587"` | SMTP port (465 = TLS, 587 = STARTTLS) |
+| `email_smtp_user` | `""` | SMTP username |
+| `email_smtp_password` | `""` | SMTP password |
+| `email_from` | `""` | Sender address |
+| `email_to` | `""` | Comma-separated recipient addresses |
 
 **Path alias:** `@/*` resolves to the project root.
 
