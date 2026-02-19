@@ -1,13 +1,12 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { DiffResult } from './diff'
 
-if (!process.env.ANTHROPIC_API_KEY) {
-  throw new Error('ANTHROPIC_API_KEY is not set. Add it to .env.local before running the app.')
+function getClient(): Anthropic {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    throw new Error('ANTHROPIC_API_KEY is not set. Add it to .env.local before running the app.')
+  }
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 }
-
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-})
 
 export interface AISummary {
   summary: string
@@ -47,7 +46,7 @@ Severity guide:
 - medium: messaging updates, new content sections, team/partnership news
 - low: minor copy tweaks, small layout changes, blog posts`
 
-  const message = await client.messages.create({
+  const message = await getClient().messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 1024,
     system:
