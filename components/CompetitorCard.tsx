@@ -33,7 +33,7 @@ export default function CompetitorCard({
   return (
     <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {/* Top accent */}
-      <div className="h-1 bg-blue-500" />
+      <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
 
       <div className="p-5">
         {/* Header */}
@@ -57,7 +57,7 @@ export default function CompetitorCard({
           <button
             onClick={() => onScan(id)}
             disabled={scanning}
-            className="shrink-0 text-xs px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+            className="shrink-0 text-xs px-3 py-1.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
           >
             {scanning ? 'Scanning…' : 'Scan Now'}
           </button>
