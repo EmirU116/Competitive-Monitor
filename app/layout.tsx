@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { Geist } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
 import SidebarNav from '@/components/SidebarNav'
 import './globals.css'
 
 const geist = Geist({ subsets: ['latin'] })
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
 
 export const metadata: Metadata = {
   title: 'Competitive Intelligence Monitor',
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geist.className} bg-gray-50 min-h-screen flex`}>
+      <body className={`${geist.className} ${geistMono.variable} bg-gray-50 min-h-screen flex`}>
         {/* Sidebar */}
         <aside className="w-56 bg-slate-900 flex flex-col shrink-0 sticky top-0 h-screen">
           {/* Logo */}

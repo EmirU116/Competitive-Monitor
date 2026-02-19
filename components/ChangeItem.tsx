@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 interface ChangeItemProps {
   pageUrl: string
   summary: string
@@ -50,12 +52,12 @@ export default function ChangeItem({
           {/* Top row */}
           <div className="flex flex-wrap items-center gap-2 mb-2">
             {competitorName && competitorId && (
-              <a
+              <Link
                 href={`/competitors/${competitorId}`}
                 className="text-sm font-semibold text-gray-900 hover:text-blue-600"
               >
                 {competitorName}
-              </a>
+              </Link>
             )}
             <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${cfg.badge}`}>
               {cfg.label}

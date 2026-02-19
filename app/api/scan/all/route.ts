@@ -4,6 +4,8 @@ import { scrapePage } from '@/lib/scraper'
 import { computeDiff } from '@/lib/diff'
 import { generateChangeSummary } from '@/lib/ai'
 
+export const maxDuration = 300
+
 export async function POST() {
   const competitors = await prisma.competitor.findMany()
 
@@ -14,7 +16,13 @@ export async function POST() {
   }[] = []
 
   for (const competitor of competitors) {
-    const pages: string[] = JSON.parse(competitor.pages)
+    let pages: string[]
+    try {
+      pages = JSON.parse(competitor.pages)
+    } catch {
+      results.push({ competitorId: competitor.id, competitorName: competitor.name, pages: [{ pageUrl: '', status: 'error: malformed pages data' }] })
+      continue
+    }
     const pageResults: { pageUrl: string; status: string; changeDetected?: boolean }[] = []
 
     for (const pageUrl of pages) {

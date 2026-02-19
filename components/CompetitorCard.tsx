@@ -21,7 +21,8 @@ export default function CompetitorCard({
   onScan,
   scanning,
 }: CompetitorCardProps) {
-  const pageList: string[] = JSON.parse(pages)
+  let pageList: string[] = []
+  try { pageList = JSON.parse(pages) } catch { /* malformed — show empty list */ }
   const lastScan = snapshots[0]?.createdAt
     ? new Date(snapshots[0].createdAt).toLocaleString()
     : 'Never'

@@ -4,6 +4,8 @@ import { scrapePage } from '@/lib/scraper'
 import { computeDiff } from '@/lib/diff'
 import { generateChangeSummary } from '@/lib/ai'
 
+export const maxDuration = 300
+
 export async function POST(req: NextRequest) {
   const body = await req.json()
   const { competitorId } = body
@@ -20,7 +22,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Competitor not found' }, { status: 404 })
   }
 
-  const pages: string[] = JSON.parse(competitor.pages)
+  let pages: string[]
+  try {
+    pages = JSON.parse(competitor.pages)
+  } catch {
+    return NextResponse.json({ error: 'Competitor has malformed pages data' }, { status: 500 })
+  }
   const results: { pageUrl: string; status: string; changeDetected?: boolean }[] = []
 
   for (const pageUrl of pages) {

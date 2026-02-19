@@ -17,7 +17,13 @@ export function startScheduler() {
     const competitors = await prisma.competitor.findMany()
 
     for (const competitor of competitors) {
-      const pages: string[] = JSON.parse(competitor.pages)
+      let pages: string[]
+      try {
+        pages = JSON.parse(competitor.pages)
+      } catch {
+        console.error(`[scheduler] Malformed pages JSON for competitor ${competitor.id}`)
+        continue
+      }
 
       for (const pageUrl of pages) {
         try {

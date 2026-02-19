@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import ChangeItem from '@/components/ChangeItem'
 import Link from 'next/link'
@@ -39,7 +39,7 @@ export default function CompetitorDetailPage() {
   const [deleting, setDeleting] = useState(false)
   const [deleteError, setDeleteError] = useState<string | null>(null)
 
-  async function fetchCompetitor() {
+  const fetchCompetitor = useCallback(async () => {
     const res = await fetch(`/api/competitors/${id}`)
     if (!res.ok) {
       setLoading(false)
@@ -48,11 +48,11 @@ export default function CompetitorDetailPage() {
     }
     setCompetitor(await res.json())
     setLoading(false)
-  }
+  }, [id, router])
 
   useEffect(() => {
     fetchCompetitor()
-  }, [id])
+  }, [fetchCompetitor])
 
   async function handleScan() {
     setScanning(true)
@@ -92,7 +92,8 @@ export default function CompetitorDetailPage() {
 
   if (!competitor) return null
 
-  const pages: string[] = JSON.parse(competitor.pages)
+  let pages: string[] = []
+  try { pages = JSON.parse(competitor.pages) } catch { /* malformed — show empty list */ }
 
   // Collect all changes across all snapshots, sorted newest first
   const allChanges = competitor.snapshots
