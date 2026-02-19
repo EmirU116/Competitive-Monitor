@@ -110,7 +110,7 @@ export default function CompetitorDetailPage() {
       <div>
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
         >
           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 5l-7 7 7 7" />
@@ -120,12 +120,12 @@ export default function CompetitorDetailPage() {
 
         <div className="flex items-start justify-between mt-3 gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{competitor.name}</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{competitor.name}</h1>
             <a
               href={competitor.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-indigo-500 transition-colors mt-0.5 inline-block"
+              className="text-sm text-gray-400 dark:text-gray-500 hover:text-indigo-500 transition-colors mt-0.5 inline-block"
             >
               {competitor.url}
             </a>
@@ -155,7 +155,7 @@ export default function CompetitorDetailPage() {
               <button
                 onClick={handleDelete}
                 disabled={deleting}
-                className="px-4 py-2 bg-white border border-red-200 text-red-600 text-sm font-medium rounded-lg hover:bg-red-50 disabled:opacity-50 transition-colors"
+                className="px-4 py-2 bg-white dark:bg-gray-800 border border-red-200 text-red-600 text-sm font-medium rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 disabled:opacity-50 transition-colors"
               >
                 {deleting ? 'Deleting…' : 'Delete'}
               </button>
@@ -169,40 +169,40 @@ export default function CompetitorDetailPage() {
 
       {/* Info cards */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center mb-3">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
+          <div className="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center mb-3">
             <svg className="w-3.5 h-3.5 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
               <polyline points="14 2 14 8 20 8" />
             </svg>
           </div>
           <p className="text-xs text-gray-500 mb-1">Pages Monitored</p>
-          <p className="text-2xl font-bold text-gray-900">{pages.length}</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{pages.length}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <div className="w-7 h-7 rounded-lg bg-violet-50 flex items-center justify-center mb-3">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
+          <div className="w-7 h-7 rounded-lg bg-violet-50 dark:bg-violet-900/30 flex items-center justify-center mb-3">
             <svg className="w-3.5 h-3.5 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
               <polyline points="12 6 12 12 16 14" />
             </svg>
           </div>
           <p className="text-xs text-gray-500 mb-1">Total Scans</p>
-          <p className="text-2xl font-bold text-gray-900">{competitor.snapshots.length}</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{competitor.snapshots.length}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <div className="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center mb-3">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
+          <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center mb-3">
             <svg className="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
           </div>
           <p className="text-xs text-gray-500 mb-1">Changes Detected</p>
-          <p className="text-2xl font-bold text-gray-900">{allChanges.length}</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{allChanges.length}</p>
         </div>
       </div>
 
       {/* Monitored pages */}
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-        <h2 className="text-sm font-semibold text-gray-700 mb-4">Monitored Pages</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm">
+        <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Monitored Pages</h2>
         <ul className="space-y-2">
           {pages.map((p) => (
             <li key={p} className="flex items-center gap-2">
@@ -219,7 +219,7 @@ export default function CompetitorDetailPage() {
           ))}
         </ul>
         {lastScan && (
-          <p className="text-xs text-gray-400 mt-4 pt-4 border-t border-gray-100">
+          <p className="text-xs text-gray-400 mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
             Last scan: {new Date(lastScan).toLocaleString()}
           </p>
         )}
@@ -236,7 +236,7 @@ export default function CompetitorDetailPage() {
           )}
         </div>
         {allChanges.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-xl border border-gray-100 shadow-sm">
+          <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
             <p className="text-gray-400 text-sm">
               {competitor.snapshots.length === 0
                 ? 'Run your first scan to capture a baseline.'

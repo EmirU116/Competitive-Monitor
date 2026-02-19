@@ -13,23 +13,23 @@ interface ChangeItemProps {
 
 const severityConfig = {
   high: {
-    bg: 'bg-red-50',
-    border: 'border-red-200',
-    badge: 'bg-red-100 text-red-700',
+    bg: 'bg-red-50 dark:bg-red-900/20',
+    border: 'border-red-200 dark:border-red-800',
+    badge: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400',
     dot: 'bg-red-500',
     label: 'High',
   },
   medium: {
-    bg: 'bg-amber-50',
-    border: 'border-amber-200',
-    badge: 'bg-amber-100 text-amber-700',
+    bg: 'bg-amber-50 dark:bg-amber-900/20',
+    border: 'border-amber-200 dark:border-amber-800',
+    badge: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400',
     dot: 'bg-amber-500',
     label: 'Medium',
   },
   low: {
-    bg: 'bg-slate-50',
-    border: 'border-slate-200',
-    badge: 'bg-slate-100 text-slate-600',
+    bg: 'bg-slate-50 dark:bg-slate-800',
+    border: 'border-slate-200 dark:border-slate-700',
+    badge: 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400',
     dot: 'bg-slate-400',
     label: 'Low',
   },
@@ -56,7 +56,7 @@ export default function ChangeItem({
             {competitorName && competitorId && (
               <Link
                 href={`/competitors/${competitorId}`}
-                className="text-sm font-semibold text-gray-900 hover:text-blue-600"
+                className="text-sm font-semibold text-gray-900 dark:text-gray-100 hover:text-blue-600"
               >
                 {competitorName}
               </Link>
@@ -64,20 +64,20 @@ export default function ChangeItem({
             <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${cfg.badge}`}>
               {cfg.label}
             </span>
-            <span className="text-xs text-gray-400 ml-auto">
+            <span className="text-xs text-gray-400 dark:text-gray-500 ml-auto">
               {new Date(detectedAt).toLocaleString()}
             </span>
           </div>
 
           {/* Summary */}
-          <p className="text-sm text-gray-700 leading-relaxed">{summary}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{summary}</p>
 
           {/* Page URL */}
           <a
             href={pageUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 text-xs text-gray-400 hover:text-blue-500 truncate block"
+            className="mt-2 text-xs text-gray-400 dark:text-gray-500 hover:text-blue-500 truncate block"
           >
             {pageUrl}
           </a>

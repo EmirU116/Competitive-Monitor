@@ -33,8 +33,8 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: () => void 
     <button
       type="button"
       onClick={onChange}
-      className={`relative inline-flex h-6 w-10 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-        checked ? 'bg-indigo-600' : 'bg-gray-200'
+      className={`relative inline-flex h-6 w-10 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+        checked ? 'bg-indigo-600' : 'bg-gray-200 dark:bg-gray-600'
       }`}
     >
       <span
@@ -128,7 +128,7 @@ export default function SettingsPage() {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500'
+    'w-full rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-500 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500'
 
   if (loading) {
     return (
@@ -141,24 +141,24 @@ export default function SettingsPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 pb-28 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Notification Settings</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Notification Settings</h1>
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Configure how and when you receive alerts about competitor changes.
         </p>
       </div>
 
       {/* Threshold card */}
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-        <h2 className="text-base font-semibold text-gray-900 mb-1">Notification Threshold</h2>
-        <p className="text-sm text-gray-500 mb-4">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Notification Threshold</h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
           Only send notifications for changes at or above this severity level.
         </p>
         <div className="flex items-center gap-3">
-          <label className="text-sm font-medium text-gray-700 w-32">Min severity</label>
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-300 w-32">Min severity</label>
           <select
             value={settings.notify_min_severity}
             onChange={(e) => set('notify_min_severity', e.target.value)}
-            className="rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 px-3 py-2 text-sm text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           >
             <option value="low">🟢 Low — all changes</option>
             <option value="medium">🟡 Medium and above</option>
@@ -168,9 +168,9 @@ export default function SettingsPage() {
       </div>
 
       {/* Webhook card */}
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm">
         <div className="flex items-center justify-between mb-1">
-          <h2 className="text-base font-semibold text-gray-900">Webhook</h2>
+          <h2 className="text-base font-semibold text-gray-900 dark:text-white">Webhook</h2>
           <Toggle
             checked={settings.webhook_enabled === 'true'}
             onChange={() =>
@@ -178,14 +178,14 @@ export default function SettingsPage() {
             }
           />
         </div>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
           Send Slack-compatible webhook payloads to any URL (Slack, Discord, Teams, etc.).
         </p>
 
         {settings.webhook_enabled === 'true' && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Webhook URL</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Webhook URL</label>
               <input
                 type="url"
                 placeholder="https://hooks.slack.com/services/..."
@@ -199,7 +199,7 @@ export default function SettingsPage() {
                 type="button"
                 onClick={handleTestWebhook}
                 disabled={webhookTestStatus === 'loading' || !settings.webhook_url}
-                className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 disabled:opacity-50 transition-colors"
+                className="rounded-lg bg-gray-100 dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors"
               >
                 {webhookTestStatus === 'loading' ? 'Sending…' : 'Send Test'}
               </button>
@@ -215,9 +215,9 @@ export default function SettingsPage() {
       </div>
 
       {/* Email card */}
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm">
         <div className="flex items-center justify-between mb-1">
-          <h2 className="text-base font-semibold text-gray-900">Email</h2>
+          <h2 className="text-base font-semibold text-gray-900 dark:text-white">Email</h2>
           <Toggle
             checked={settings.email_enabled === 'true'}
             onChange={() =>
@@ -225,7 +225,7 @@ export default function SettingsPage() {
             }
           />
         </div>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
           Send HTML email alerts via SMTP (works with Mailtrap, SendGrid, Gmail, etc.).
         </p>
 
@@ -233,7 +233,7 @@ export default function SettingsPage() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">SMTP Host</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">SMTP Host</label>
                 <input
                   type="text"
                   placeholder="smtp.mailtrap.io"
@@ -243,7 +243,7 @@ export default function SettingsPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">SMTP Port</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">SMTP Port</label>
                 <input
                   type="number"
                   placeholder="587"
@@ -255,7 +255,7 @@ export default function SettingsPage() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">SMTP Username</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">SMTP Username</label>
                 <input
                   type="text"
                   placeholder="username"
@@ -265,7 +265,7 @@ export default function SettingsPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">SMTP Password</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">SMTP Password</label>
                 <input
                   type="password"
                   placeholder="••••••••"
@@ -276,7 +276,7 @@ export default function SettingsPage() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">From Address</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">From Address</label>
               <input
                 type="email"
                 placeholder="alerts@yourcompany.com"
@@ -286,7 +286,7 @@ export default function SettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 To Address(es)
               </label>
               <input
@@ -296,14 +296,14 @@ export default function SettingsPage() {
                 onChange={(e) => set('email_to', e.target.value)}
                 className={inputClass}
               />
-              <p className="mt-1 text-xs text-gray-400">Separate multiple addresses with commas.</p>
+              <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">Separate multiple addresses with commas.</p>
             </div>
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={handleTestEmail}
                 disabled={emailTestStatus === 'loading'}
-                className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 disabled:opacity-50 transition-colors"
+                className="rounded-lg bg-gray-100 dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors"
               >
                 {emailTestStatus === 'loading' ? 'Sending…' : 'Send Test Email'}
               </button>
@@ -319,7 +319,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Sticky save bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-4 flex items-center justify-end gap-3 z-10">
+      <div className="fixed bottom-0 left-60 right-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 px-6 py-4 flex items-center justify-end gap-3 z-10">
         {savedBadge && (
           <span className="text-sm font-medium text-green-600">✓ Saved!</span>
         )}

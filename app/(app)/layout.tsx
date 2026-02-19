@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import SidebarNav from '@/components/SidebarNav'
+import DarkModeToggle from '@/components/DarkModeToggle'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-gray-50 min-h-screen flex">
+    <div className="bg-gray-50 dark:bg-gray-950 min-h-screen flex">
       {/* Sidebar */}
       <aside className="w-60 bg-slate-950 flex flex-col shrink-0 sticky top-0 h-screen">
         {/* Logo */}
@@ -34,9 +35,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Footer */}
         <div className="px-5 py-4 border-t border-slate-800">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-            <p className="text-xs text-slate-500">Auto-scans every hour</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+              <p className="text-xs text-slate-500">Auto-scans every hour</p>
+            </div>
+            <DarkModeToggle />
           </div>
         </div>
       </aside>

@@ -31,7 +31,7 @@ export default function CompetitorCard({
   })()
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {/* Top accent */}
       <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
 
@@ -41,7 +41,7 @@ export default function CompetitorCard({
           <div className="min-w-0">
             <Link
               href={`/competitors/${id}`}
-              className="text-base font-semibold text-gray-900 hover:text-blue-600 truncate block"
+              className="text-base font-semibold text-gray-900 dark:text-white hover:text-blue-600 truncate block"
             >
               {name}
             </Link>
@@ -49,7 +49,7 @@ export default function CompetitorCard({
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-gray-400 hover:text-blue-500 truncate block mt-0.5"
+              className="text-xs text-gray-400 dark:text-gray-500 hover:text-blue-500 truncate block mt-0.5"
             >
               {hostname}
             </a>
@@ -64,7 +64,7 @@ export default function CompetitorCard({
         </div>
 
         {/* Meta */}
-        <div className="mt-4 flex items-center gap-4 text-xs text-gray-500">
+        <div className="mt-4 flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
           <span className="flex items-center gap-1">
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -86,14 +86,14 @@ export default function CompetitorCard({
           {pageList.slice(0, 3).map((p) => (
             <span
               key={p}
-              className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full truncate max-w-[180px]"
+              className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full truncate max-w-[180px]"
               title={p}
             >
               {p.replace(/^https?:\/\//, '')}
             </span>
           ))}
           {pageList.length > 3 && (
-            <span className="text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">
+            <span className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-400 px-2 py-0.5 rounded-full">
               +{pageList.length - 3} more
             </span>
           )}

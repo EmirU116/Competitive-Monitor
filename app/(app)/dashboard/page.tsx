@@ -123,7 +123,7 @@ export default function DashboardPage() {
       {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
           <p className="text-sm text-gray-500 mt-0.5">
             {competitors.length === 0
               ? 'No competitors tracked yet'
@@ -135,7 +135,7 @@ export default function DashboardPage() {
             <button
               onClick={handleScanAll}
               disabled={scanningAll || scanningId !== null}
-              className="inline-flex items-center gap-1.5 bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
             >
               {scanningAll ? (
                 <>
@@ -169,10 +169,10 @@ export default function DashboardPage() {
       {/* Stats row */}
       {competitors.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Competitors</p>
-              <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center">
                 <svg className="w-3.5 h-3.5 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
@@ -181,26 +181,26 @@ export default function DashboardPage() {
                 </svg>
               </div>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{competitors.length}</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">{competitors.length}</p>
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Changes</p>
-              <div className="w-7 h-7 rounded-lg bg-violet-50 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-violet-50 dark:bg-violet-900/30 flex items-center justify-center">
                 <svg className="w-3.5 h-3.5 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                 </svg>
               </div>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{changes.length}</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">{changes.length}</p>
             <p className="text-xs text-gray-400 mt-1">last 50</p>
           </div>
 
-          <div className={`rounded-xl border p-5 shadow-sm ${highSeverity > 0 ? 'bg-red-50 border-red-100' : 'bg-white border-gray-100'}`}>
+          <div className={`rounded-xl border p-5 shadow-sm ${highSeverity > 0 ? 'bg-red-50 dark:bg-red-900/20 border-red-100 dark:border-red-800' : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'}`}>
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">High Severity</p>
-              <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${highSeverity > 0 ? 'bg-red-100' : 'bg-gray-50'}`}>
+              <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${highSeverity > 0 ? 'bg-red-100 dark:bg-red-900/40' : 'bg-gray-50 dark:bg-gray-700'}`}>
                 <svg className={`w-3.5 h-3.5 ${highSeverity > 0 ? 'text-red-500' : 'text-gray-400'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
                   <line x1="12" y1="9" x2="12" y2="13" />
@@ -213,17 +213,17 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Last Scan</p>
-              <div className="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center">
                 <svg className="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
               </div>
             </div>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-2xl font-bold text-gray-900 dark:text-white">
               {lastScanDate ? timeAgo(lastScanDate) : '—'}
             </p>
           </div>
@@ -232,14 +232,14 @@ export default function DashboardPage() {
 
       {/* Competitors */}
       {competitors.length === 0 ? (
-        <div className="text-center py-24 bg-white rounded-2xl border border-gray-100 shadow-sm">
-          <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-5">
+        <div className="text-center py-24 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
+          <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center mx-auto mb-5">
             <svg className="w-7 h-7 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
               <circle cx="12" cy="12" r="3" />
             </svg>
           </div>
-          <h3 className="text-gray-900 font-semibold text-base mb-1">No competitors tracked yet</h3>
+          <h3 className="text-gray-900 dark:text-white font-semibold text-base mb-1">No competitors tracked yet</h3>
           <p className="text-gray-400 text-sm mb-6 max-w-xs mx-auto">
             Add a competitor to start monitoring their website for changes.
           </p>
@@ -286,7 +286,7 @@ export default function DashboardPage() {
             )}
           </div>
           {changes.length === 0 ? (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
               <p className="text-gray-400 text-sm">No changes detected yet. Run a scan to get started.</p>
             </div>
           ) : (

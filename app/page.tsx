@@ -9,7 +9,7 @@ const features = [
       </svg>
     ),
     color: 'text-indigo-500',
-    bg: 'bg-indigo-50',
+    bg: 'bg-indigo-50 dark:bg-indigo-900/30',
     title: 'Automated Scraping',
     description:
       'Add any URL and CompetitorWatch checks it on a schedule using headless browser technology. No browser extensions, no manual checks, no missed updates.',
@@ -23,7 +23,7 @@ const features = [
       </svg>
     ),
     color: 'text-violet-500',
-    bg: 'bg-violet-50',
+    bg: 'bg-violet-50 dark:bg-violet-900/30',
     title: 'AI-Powered Summaries',
     description:
       'Every change is analyzed by Claude AI, which writes a plain-English summary explaining what changed and what it might mean for your business — not just raw diffs.',
@@ -37,7 +37,7 @@ const features = [
       </svg>
     ),
     color: 'text-amber-500',
-    bg: 'bg-amber-50',
+    bg: 'bg-amber-50 dark:bg-amber-900/30',
     title: 'Severity Ratings',
     description:
       'Changes are automatically rated High, Medium, or Low so your team knows exactly what to prioritize without reading every diff or opening every page.',
@@ -76,9 +76,9 @@ const benefits = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white dark:bg-gray-950 font-sans">
       {/* ── Navbar ─────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+      <header className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2.5">
@@ -88,14 +88,14 @@ export default function LandingPage() {
                 <circle cx="12" cy="12" r="3" />
               </svg>
             </div>
-            <span className="text-sm font-bold text-gray-900 tracking-tight">CompetitorWatch</span>
+            <span className="text-sm font-bold text-gray-900 dark:text-white tracking-tight">CompetitorWatch</span>
           </div>
 
           {/* Nav links */}
-          <nav className="hidden md:flex items-center gap-7 text-sm text-gray-500">
-            <a href="#features" className="hover:text-gray-900 transition-colors">Features</a>
-            <a href="#how-it-works" className="hover:text-gray-900 transition-colors">How it works</a>
-            <a href="#why" className="hover:text-gray-900 transition-colors">Why use this</a>
+          <nav className="hidden md:flex items-center gap-7 text-sm text-gray-500 dark:text-gray-400">
+            <a href="#features" className="hover:text-gray-900 dark:hover:text-white transition-colors">Features</a>
+            <a href="#how-it-works" className="hover:text-gray-900 dark:hover:text-white transition-colors">How it works</a>
+            <a href="#why" className="hover:text-gray-900 dark:hover:text-white transition-colors">Why use this</a>
           </nav>
 
           {/* CTA */}
@@ -190,14 +190,14 @@ export default function LandingPage() {
       </section>
 
       {/* ── Features ───────────────────────────── */}
-      <section id="features" className="py-24 bg-white">
+      <section id="features" className="py-24 bg-white dark:bg-gray-950">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="text-xs font-semibold text-indigo-600 uppercase tracking-widest mb-3">Features</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Everything you need to track the competition
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
               From automated scraping to AI-written summaries, CompetitorWatch handles
               the entire monitoring pipeline so you don&apos;t have to.
             </p>
@@ -207,13 +207,13 @@ export default function LandingPage() {
             {features.map((f) => (
               <div
                 key={f.title}
-                className="rounded-2xl border border-gray-100 p-8 hover:border-gray-200 hover:shadow-lg transition-all group"
+                className="rounded-2xl border border-gray-100 dark:border-gray-800 p-8 hover:border-gray-200 dark:hover:border-gray-700 hover:shadow-lg transition-all group dark:bg-gray-900"
               >
                 <div className={`w-11 h-11 rounded-xl ${f.bg} ${f.color} flex items-center justify-center mb-5 group-hover:scale-105 transition-transform`}>
                   {f.icon}
                 </div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{f.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
+                <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">{f.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>
@@ -221,29 +221,29 @@ export default function LandingPage() {
       </section>
 
       {/* ── How it works ───────────────────────── */}
-      <section id="how-it-works" className="py-24 bg-gray-50">
+      <section id="how-it-works" className="py-24 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="text-xs font-semibold text-indigo-600 uppercase tracking-widest mb-3">How it works</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Up and running in minutes
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
               Three straightforward steps from setup to automated, AI-powered competitive intelligence.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-8 relative">
             {/* Connector line between steps */}
-            <div className="hidden sm:block absolute top-8 left-[calc(16.67%+2.5rem)] right-[calc(16.67%+2.5rem)] h-px bg-gray-200" />
+            <div className="hidden sm:block absolute top-8 left-[calc(16.67%+2.5rem)] right-[calc(16.67%+2.5rem)] h-px bg-gray-200 dark:bg-gray-700" />
 
             {steps.map((step) => (
               <div key={step.number}>
-                <div className="w-16 h-16 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center justify-center mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm flex items-center justify-center mb-6">
                   <span className="text-xl font-bold text-indigo-600">{step.number}</span>
                 </div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{step.description}</p>
+                <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>
@@ -251,19 +251,19 @@ export default function LandingPage() {
       </section>
 
       {/* ── Why section ────────────────────────── */}
-      <section id="why" className="py-24 bg-white">
+      <section id="why" className="py-24 bg-white dark:bg-gray-950">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <p className="text-xs font-semibold text-indigo-600 uppercase tracking-widest mb-3">Why CompetitorWatch</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-5">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-5">
                 Built for teams that can&apos;t afford to miss anything
               </h2>
-              <p className="text-gray-500 leading-relaxed mb-4">
+              <p className="text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
                 Competitive intelligence used to mean expensive SaaS subscriptions or
                 time-consuming manual checks. Neither option scales.
               </p>
-              <p className="text-gray-500 leading-relaxed mb-8">
+              <p className="text-gray-500 dark:text-gray-400 leading-relaxed mb-8">
                 CompetitorWatch gives you automated, AI-powered monitoring that runs on your
                 own infrastructure — no usage caps, no data leaving your server, no recurring bill.
               </p>
@@ -280,13 +280,13 @@ export default function LandingPage() {
 
             <ul className="space-y-3">
               {benefits.map((b) => (
-                <li key={b} className="flex items-start gap-3.5 p-4 rounded-xl hover:bg-gray-50 transition-colors">
-                  <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center shrink-0 mt-0.5">
+                <li key={b} className="flex items-start gap-3.5 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                  <div className="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center shrink-0 mt-0.5">
                     <svg className="w-3 h-3 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <span className="text-sm text-gray-700">{b}</span>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">{b}</span>
                 </li>
               ))}
             </ul>
