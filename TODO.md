@@ -18,6 +18,9 @@ Core MVP is complete and running. The app monitors competitor websites, detects 
 - [x] Add Competitor form
 - [x] GitHub remote setup
 - [x] Professional UI redesign (sidebar layout, stats row, polished cards)
+- [x] Cascade delete on Competitor → Snapshot → Change (onDelete: Cascade in schema)
+- [x] Error handling on all API routes (try/catch, JSON error responses)
+- [x] UI error handling: fetchData, handleDelete with user-visible error states
 
 ## In Progress
 - [ ] End-to-end scan testing (verifying scrape → diff → AI summary flow works)
@@ -26,7 +29,7 @@ Core MVP is complete and running. The app monitors competitor websites, detects 
 
 ### High Priority
 - [ ] Store `keyChanges` array from AI response in the database and display as bullet points on ChangeItem
-- [ ] Delete cascades: deleting a competitor should also delete its snapshots and changes (currently may error if Prisma doesn't cascade)
+- [x] Delete cascades: deleting a competitor should also delete its snapshots and changes (currently may error if Prisma doesn't cascade)
 - [ ] Email or Slack notification when a high/medium severity change is detected
 - [ ] Scan All progress feedback (show per-competitor progress, not just a spinner)
 

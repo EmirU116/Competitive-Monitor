@@ -22,7 +22,7 @@ model Snapshot {
   pageUrl      String
   content      String     // scraped text content
   createdAt    DateTime   @default(now())
-  competitor   Competitor @relation(fields: [competitorId], references: [id])
+  competitor   Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
   changes      Change[]
 }
 
@@ -34,5 +34,5 @@ model Change {
   summary    String   // Claude AI summary
   severity   String   // "low" | "medium" | "high"
   detectedAt DateTime @default(now())
-  snapshot   Snapshot @relation(fields: [snapshotId], references: [id])
+  snapshot   Snapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
 }

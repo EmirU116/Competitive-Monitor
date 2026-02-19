@@ -44,15 +44,23 @@ export default function DashboardPage() {
   const [scanningId, setScanningId] = useState<string | null>(null)
   const [scanningAll, setScanningAll] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [fetchError, setFetchError] = useState<string | null>(null)
 
   async function fetchData() {
-    const [compRes, changeRes] = await Promise.all([
-      fetch('/api/competitors'),
-      fetch('/api/changes'),
-    ])
-    setCompetitors(await compRes.json())
-    setChanges(await changeRes.json())
-    setLoading(false)
+    try {
+      const [compRes, changeRes] = await Promise.all([
+        fetch('/api/competitors'),
+        fetch('/api/changes'),
+      ])
+      if (!compRes.ok || !changeRes.ok) throw new Error('Failed to load data')
+      setCompetitors(await compRes.json())
+      setChanges(await changeRes.json())
+      setFetchError(null)
+    } catch {
+      setFetchError('Failed to load data. Please refresh the page.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -87,6 +95,14 @@ export default function DashboardPage() {
     return (
       <div className="flex items-center justify-center h-64 text-gray-400 text-sm">
         Loading…
+      </div>
+    )
+  }
+
+  if (fetchError) {
+    return (
+      <div className="flex items-center justify-center h-64 text-red-500 text-sm">
+        {fetchError}
       </div>
     )
   }

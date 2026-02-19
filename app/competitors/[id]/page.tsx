@@ -37,10 +37,12 @@ export default function CompetitorDetailPage() {
   const [scanning, setScanning] = useState(false)
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
 
   async function fetchCompetitor() {
     const res = await fetch(`/api/competitors/${id}`)
     if (!res.ok) {
+      setLoading(false)
       router.push('/dashboard')
       return
     }
@@ -69,8 +71,15 @@ export default function CompetitorDetailPage() {
   async function handleDelete() {
     if (!confirm(`Delete ${competitor?.name}? This cannot be undone.`)) return
     setDeleting(true)
-    await fetch(`/api/competitors/${id}`, { method: 'DELETE' })
-    router.push('/dashboard')
+    setDeleteError(null)
+    try {
+      const res = await fetch(`/api/competitors/${id}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('Delete failed')
+      router.push('/dashboard')
+    } catch {
+      setDeleteError('Failed to delete. Please try again.')
+      setDeleting(false)
+    }
   }
 
   if (loading) {
@@ -113,21 +122,26 @@ export default function CompetitorDetailPage() {
               {competitor.url}
             </a>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={handleScan}
-              disabled={scanning}
-              className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
-            >
-              {scanning ? 'Scanning…' : 'Scan Now'}
-            </button>
-            <button
-              onClick={handleDelete}
-              disabled={deleting}
-              className="px-4 py-2 bg-white border border-red-300 text-red-600 text-sm rounded-lg hover:bg-red-50 disabled:opacity-50 transition-colors"
-            >
-              Delete
-            </button>
+          <div className="flex flex-col items-end gap-1 shrink-0">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleScan}
+                disabled={scanning}
+                className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              >
+                {scanning ? 'Scanning…' : 'Scan Now'}
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="px-4 py-2 bg-white border border-red-300 text-red-600 text-sm rounded-lg hover:bg-red-50 disabled:opacity-50 transition-colors"
+              >
+                {deleting ? 'Deleting…' : 'Delete'}
+              </button>
+            </div>
+            {deleteError && (
+              <p className="text-xs text-red-600">{deleteError}</p>
+            )}
           </div>
         </div>
       </div>
