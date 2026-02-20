@@ -2,14 +2,18 @@
 
 import { useTheme } from './ThemeProvider'
 
-export default function DarkModeToggle() {
+export default function DarkModeToggle({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
   const { theme, toggleTheme } = useTheme()
+
+  const cls = variant === 'light'
+    ? 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+    : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
 
   return (
     <button
       onClick={toggleTheme}
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors"
+      className={`flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${cls}`}
     >
       {theme === 'dark' ? (
         /* Sun icon */
