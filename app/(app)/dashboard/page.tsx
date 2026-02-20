@@ -194,7 +194,6 @@ export default function DashboardPage() {
               </div>
             </div>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">{changes.length}</p>
-            <p className="text-xs text-gray-400 mt-1">last 50</p>
           </div>
 
           <div className={`rounded-xl border p-5 shadow-sm ${highSeverity > 0 ? 'bg-red-50 dark:bg-red-900/20 border-red-100 dark:border-red-800' : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'}`}>
