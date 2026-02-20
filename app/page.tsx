@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DarkModeToggle from '@/components/DarkModeToggle'
 
 const features = [
   {
@@ -99,15 +100,18 @@ export default function LandingPage() {
           </nav>
 
           {/* CTA */}
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center gap-1.5 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
-          >
-            Open Dashboard
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
+          <div className="flex items-center gap-2">
+            <DarkModeToggle variant="light" />
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-1.5 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
+            >
+              Open Dashboard
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </header>
 
