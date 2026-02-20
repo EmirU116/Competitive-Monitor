@@ -5,7 +5,6 @@ export async function GET() {
   try {
     const changes = await prisma.change.findMany({
       orderBy: { detectedAt: 'desc' },
-      take: 50,
       include: {
         snapshot: {
           include: {
